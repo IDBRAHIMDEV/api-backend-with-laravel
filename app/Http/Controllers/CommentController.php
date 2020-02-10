@@ -14,7 +14,7 @@ class CommentController extends Controller
      */
     public function index()
     {
-        //
+        return Comment::all();
     }
 
     /**
@@ -35,7 +35,15 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $comment =  new Comment();
+        
+        $comment->content =  $request->content;
+        $comment->user_id =  $request->user_id;
+        $comment->article_id =  $request->article_id;
+        
+        $comment->save();
+
+        return $comment;
     }
 
     /**
@@ -46,7 +54,7 @@ class CommentController extends Controller
      */
     public function show(Comment $comment)
     {
-        //
+        return $comment;
     }
 
     /**
@@ -69,7 +77,14 @@ class CommentController extends Controller
      */
     public function update(Request $request, Comment $comment)
     {
-        //
+       
+        $comment->content =  $request->content;
+        $comment->user_id =  $request->user_id;
+        $comment->article_id =  $request->article_id;
+        
+        $comment->save();
+
+        return $comment;
     }
 
     /**
@@ -80,6 +95,6 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        //
+        $comment->delete();
     }
 }

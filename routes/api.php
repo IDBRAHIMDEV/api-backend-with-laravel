@@ -13,11 +13,9 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/category', 'CategoryController@index');
-Route::post('/category', 'CategoryController@store');
-Route::put('/category/{id}', 'CategoryController@update');
-Route::delete('/category/{id}', 'CategoryController@destroy');
-Route::get('/category/{id}', 'CategoryController@show');
+Route::apiResource('/category', 'CategoryController');
+Route::apiResource('/article', 'ArticleController');
+Route::apiResource('/comment', 'CommentController');
 
 
 // Route::middleware('auth:api')->get('/user', function (Request $request) {

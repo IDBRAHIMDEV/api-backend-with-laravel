@@ -7,7 +7,7 @@ use App\Article;
 
 class Category extends Model
 {
-    public function Articles() {
+    public function articles() {
         return $this->hasMany(Article::class);
     }
 }

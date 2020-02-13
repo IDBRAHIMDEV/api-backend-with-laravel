@@ -17,8 +17,9 @@ Route::post('login', 'ApiController@login');
 Route::post('register', 'ApiController@register');
 
 Route::apiResource('/article', 'ArticleController');
+Route::apiResource('/category', 'CategoryController');
+
 Route::group(['middleware' => 'auth.jwt'], function () {
-    Route::apiResource('/category', 'CategoryController');
     Route::apiResource('/comment', 'CommentController');
 });
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Article;
 use App\Http\Resources\ArticleResource;
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class ArticleController extends Controller
 {
@@ -40,7 +41,7 @@ class ArticleController extends Controller
         $article =  new Article();
         $article->title =  $request->title;
         $article->content =  $request->content;
-        $article->user_id =  $request->user_id;
+        $article->user_id =  JWTAuth::parseToken()->authenticate()->id;
         $article->category_id =  $request->category_id;
         
         $article->save();

@@ -28,8 +28,7 @@ class ArticleResource extends JsonResource
                 'username' => $this->user->name,
                 'code' => $this->user_id
             ],
-            'upsell' => Category::find($this->category_id)->articles()->take(3)->get()
-            ,
+            
             'date_modification' => $this->updated_at
         ];
     }

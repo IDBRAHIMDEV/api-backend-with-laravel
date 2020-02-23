@@ -5,9 +5,17 @@ namespace App\Http\Controllers;
 use App\Article;
 use App\Http\Resources\ArticleResource;
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class ArticleController extends Controller
 {
+
+    public function __construct()
+    {
+       
+        $this->middleware('auth.jwt')->except(['index', 'show']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +24,7 @@ class ArticleController extends Controller
     public function index()
     {
 
-        $articles = Article::all();
+        $articles = Article::orderBy('updated_at', 'desc')->get();
 
         return ArticleResource::collection($articles);
     }
@@ -33,7 +41,7 @@ class ArticleController extends Controller
         $article =  new Article();
         $article->title =  $request->title;
         $article->content =  $request->content;
-        $article->user_id =  $request->user_id;
+        $article->user_id =  JWTAuth::parseToken()->authenticate()->id;
         $article->category_id =  $request->category_id;
         
         $article->save();
@@ -50,7 +58,7 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        return $article;
+        return new ArticleResource($article);
     }
 
 

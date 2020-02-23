@@ -13,9 +13,15 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::apiResource('/category', 'CategoryController');
+Route::post('login', 'ApiController@login');
+Route::post('register', 'ApiController@register');
+
 Route::apiResource('/article', 'ArticleController');
-Route::apiResource('/comment', 'CommentController');
+Route::apiResource('/category', 'CategoryController');
+
+Route::group(['middleware' => 'auth.jwt'], function () {
+    Route::apiResource('/comment', 'CommentController');
+});
 
 
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
